@@ -199,6 +199,19 @@ export const ProjectDirectorDashboard: React.FC<ProjectDirectorDashboardProps> =
                 <p className="text-xs text-zinc-500">Architectural clarifications, structural clashing, and engineering responses</p>
               </div>
 
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={() => onNavigateTab('operations')}
+                  className="px-3 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs transition flex items-center gap-1.5 shadow-sm"
+                >
+                  <span>Open Governed Operations Hub</span>
+                  <ChevronRight className="w-3 h-3" />
+                </button>
+              </div>
+            </div>
+
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+              <span className="text-xs text-zinc-500 font-medium">Filter by engineering discipline:</span>
               {/* Discipline Filter */}
               <div className="flex items-center gap-1 bg-zinc-100 dark:bg-zinc-900 p-1 rounded-lg border border-zinc-200 dark:border-zinc-800 text-[10px]">
                 {['All', 'Structural', 'MEP & HVAC', 'Architectural'].map((disc) => (

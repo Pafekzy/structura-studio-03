@@ -20,6 +20,7 @@ import { ProjectDirectorDashboard } from './components/stakeholders/ProjectDirec
 import { GeneralContractorDashboard } from './components/stakeholders/GeneralContractorDashboard';
 import { StructuralQADashboard } from './components/stakeholders/StructuralQADashboard';
 import { AccessRestrictedView } from './components/AccessRestrictedView';
+import { ProjectOperationsWorkspace } from './components/operations/ProjectOperationsWorkspace';
 import { SAMPLE_PROJECTS } from './data/sampleProjects';
 import { ConstructionProject, NavigationTab, UserRole } from './types';
 import { Sparkles, ArrowRight } from 'lucide-react';
@@ -33,6 +34,7 @@ const ROLE_PERMITTED_TABS: Record<UserRole, NavigationTab[]> = {
   'Owner / Client': [
     'stakeholder_hub',
     'stakeholder_owner',
+    'operations',
     'budget',
     'finished_render',
     'monitoring',
@@ -40,6 +42,7 @@ const ROLE_PERMITTED_TABS: Record<UserRole, NavigationTab[]> = {
   'Senior Project Director': [
     'stakeholder_hub',
     'stakeholder_director',
+    'operations',
     'cockpit',
     'monitoring',
     'inspection',
@@ -50,6 +53,7 @@ const ROLE_PERMITTED_TABS: Record<UserRole, NavigationTab[]> = {
   'General Contractor': [
     'stakeholder_hub',
     'stakeholder_contractor',
+    'operations',
     'monitoring',
     'inspection',
     'budget',
@@ -57,6 +61,7 @@ const ROLE_PERMITTED_TABS: Record<UserRole, NavigationTab[]> = {
   'Structural QA/QC Auditor': [
     'stakeholder_hub',
     'stakeholder_qaqc',
+    'operations',
     'inspection',
     'monitoring',
     'finished_render',
@@ -322,6 +327,14 @@ function AppContent() {
                   <StructuralQADashboard
                     project={activeProject}
                     onUpdateProject={handleUpdateActiveProject}
+                    onNavigateTab={(tab) => setActiveTab(tab)}
+                    onOpenAdvisorModal={() => setIsAdvisorOpen(true)}
+                  />
+                )}
+
+                {activeTab === 'operations' && (
+                  <ProjectOperationsWorkspace
+                    project={activeProject}
                     onNavigateTab={(tab) => setActiveTab(tab)}
                     onOpenAdvisorModal={() => setIsAdvisorOpen(true)}
                   />

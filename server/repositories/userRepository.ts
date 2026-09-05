@@ -33,6 +33,7 @@ export interface UserRoleDetails {
   companyName?: string;
   licenseNumber?: string;
   jurisdiction?: string;
+  claimedCredentials?: string;
   yearsOperating?: number;
   specialties?: string[];
 }

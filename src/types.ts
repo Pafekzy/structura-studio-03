@@ -7,6 +7,7 @@ export type NavigationTab =
   | 'budget' 
   | 'finished_render' 
   | 'new_estimator'
+  | 'operations'
   | 'stakeholder_hub'
   | 'stakeholder_owner'
   | 'stakeholder_director'
@@ -299,6 +300,9 @@ export interface UserRoleDetails {
   primaryDiscipline?: string;
   professionalBody?: string;
   registrationNumber?: string;
+  licenseNumber?: string;
+  jurisdiction?: string;
+  claimedCredentials?: string;
   companyName?: string;
   yearsOperating?: number;
   specialties?: string[];
@@ -440,7 +444,12 @@ export type AuditAction =
   | 'PROJECT_INVITATION_SENT'
   | 'PROJECT_INVITATION_ACCEPTED'
   | 'PROJECT_INVITATION_DECLINED'
-  | 'PROJECT_APPOINTMENT_REVOKED';
+  | 'PROJECT_APPOINTMENT_REVOKED'
+  | 'DIRECT_LINE_MESSAGE_SENT'
+  | 'RFI_CREATED'
+  | 'RFI_RESPONDED'
+  | 'RFI_ACKNOWLEDGED'
+  | 'RFI_CLOSED';
 
 export interface AuditEvent {
   id: string;
@@ -452,4 +461,96 @@ export interface AuditEvent {
   entityId: string;
   timestamp: string;
   metadata?: Record<string, any>;
+}
+
+// ==========================================
+// Project Operations: Direct Line (Sprint 04A)
+// ==========================================
+
+export type ChannelType = 
+  | 'OWNER_DIRECTOR' 
+  | 'OWNER_QAQC' 
+  | 'DIRECTOR_CONTRACTOR';
+
+export interface ProjectConversation {
+  id: string;
+  projectId: string;
+  channelType: ChannelType;
+  participantRoles: [ProjectRole, ProjectRole];
+  createdAt: string;
+  updatedAt: string;
+  lastMessageSnippet?: string;
+  lastMessageAt?: string;
+}
+
+export type DirectLineMessageType = 
+  | 'MESSAGE'
+  | 'INFORMATION'
+  | 'INSTRUCTION'
+  | 'CLARIFICATION_REQUEST'
+  | 'DECISION_REQUEST'
+  | 'APPROVAL_REQUEST'
+  | 'ESCALATION'
+  | 'ACKNOWLEDGEMENT';
+
+export interface ProjectMessage {
+  id: string;
+  conversationId: string;
+  projectId: string;
+  channelType: ChannelType;
+  senderUserId: string;
+  senderRole: ProjectRole;
+  senderName: string;
+  messageType: DirectLineMessageType;
+  subject?: string;
+  content: string;
+  relatedEntityId?: string;
+  createdAt: string;
+}
+
+// ==========================================
+// Project Operations: RFI Workflow (Sprint 04A)
+// ==========================================
+
+export type RFIStatus = 
+  | 'OPEN' 
+  | 'UNDER_REVIEW' 
+  | 'ANSWERED' 
+  | 'ACKNOWLEDGED' 
+  | 'CLOSED';
+
+export type RFIPriority = 
+  | 'LOW' 
+  | 'NORMAL' 
+  | 'HIGH' 
+  | 'CRITICAL';
+
+export interface RFI {
+  id: string;
+  projectId: string;
+  number: string;
+  title: string;
+  question: string;
+  discipline: string;
+  raisedByUserId: string;
+  raisedByRole: ProjectRole;
+  raisedByName: string;
+  assignedToUserId: string;
+  assignedToRole: ProjectRole;
+  assignedToName: string;
+  status: RFIStatus;
+  priority: RFIPriority;
+  relatedMilestoneId?: string;
+  relatedEvidenceIds?: string[];
+  response?: string;
+  respondedByUserId?: string;
+  respondedByName?: string;
+  respondedAt?: string;
+  acknowledgedAt?: string;
+  acknowledgementNote?: string;
+  closedAt?: string;
+  closingNotes?: string;
+  createdAt: string;
+  dueAt?: string;
+  updatedAt: string;
 }

@@ -3,6 +3,7 @@ import {
   Users, 
   ShieldCheck, 
   ShieldAlert, 
+  Shield,
   Clock, 
   UserPlus, 
   CheckCircle2, 
@@ -96,7 +97,7 @@ export const ProjectGovernanceTeamView: React.FC<ProjectGovernanceTeamViewProps>
             status: 'ACTIVE',
             assignedUser: {
               id: 'usr_director_demo',
-              name: 'Marcus Vance, AIA',
+              name: 'Marcus Vance',
               email: 'director@structura.build',
               verificationStatus: 'UNVERIFIED',
               discipline: 'Executive Project Director',
@@ -190,6 +191,17 @@ export const ProjectGovernanceTeamView: React.FC<ProjectGovernanceTeamViewProps>
           <RefreshCw className={`w-3.5 h-3.5 ${loading ? 'animate-spin' : ''}`} />
           <span>Refresh</span>
         </button>
+      </div>
+
+      {/* Provisional Organization / Owner Authority Disclosure */}
+      <div className="p-3 rounded-xl bg-amber-500/10 border border-amber-500/25 flex items-start gap-2.5 text-xs text-amber-800 dark:text-amber-300">
+        <Shield className="w-4 h-4 text-amber-500 shrink-0 mt-0.5" />
+        <div className="space-y-0.5">
+          <span className="font-bold">Provisional Organization & Fiduciary Authority Notice:</span>
+          <p className="text-[11px] leading-relaxed text-slate-600 dark:text-slate-300">
+            Corporate entity verification and ultimate legal ownership remain in <strong>UNVERIFIED / PROVISIONAL</strong> status. Project fiduciary appointments are registered under development sandbox governance; they do not certify external statutory corporate authority or state engineering licensing.
+          </p>
+        </div>
       </div>
 
       {/* 4-Role Governance Grid */}

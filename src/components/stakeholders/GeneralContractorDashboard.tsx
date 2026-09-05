@@ -18,7 +18,8 @@ import {
   FileSpreadsheet,
   Layers,
   ArrowRight,
-  Sparkles
+  Sparkles,
+  Radio
 } from 'lucide-react';
 import { ConstructionProject, NavigationTab } from '../../types';
 import { PendingInvitationsBanner } from '../governance/PendingInvitationsBanner';
@@ -99,6 +100,13 @@ export const GeneralContractorDashboard: React.FC<GeneralContractorDashboardProp
           </div>
 
           <div className="flex flex-wrap items-center gap-2.5">
+            <button
+              onClick={() => onNavigateTab('operations')}
+              className="px-4 py-2.5 rounded-xl bg-amber-500/15 hover:bg-amber-500/25 text-amber-800 dark:text-amber-300 font-bold text-xs border border-amber-500/40 transition flex items-center gap-2 shadow-sm"
+            >
+              <Radio className="w-4 h-4 text-amber-500" />
+              <span>Direct Line & RFI Register</span>
+            </button>
             <button
               onClick={() => onNavigateTab('inspection')}
               className="px-4 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-zinc-950 font-bold text-xs transition flex items-center gap-2 shadow-sm"

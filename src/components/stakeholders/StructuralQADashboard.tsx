@@ -15,7 +15,8 @@ import {
   Check, 
   Crosshair,
   Layers,
-  ChevronRight
+  ChevronRight,
+  Radio
 } from 'lucide-react';
 import { ConstructionProject, NavigationTab } from '../../types';
 import { PendingInvitationsBanner } from '../governance/PendingInvitationsBanner';
@@ -56,7 +57,7 @@ export const StructuralQADashboard: React.FC<StructuralQADashboardProps> = ({
       description: 'Minor wrinkle in synthetic FPO membrane overlap at corner upstand. Needs heat-welded patch and vacuum bell test.',
       status: 'Passed Re-Inspection',
       remedialAction: 'Contractor heat-welded 150mm patch and performed soap-solution vacuum bubble test. Result: 0 leaks at -50 kPa.',
-      inspectedBy: 'Dr. Henrik Lindqvist, PE',
+      inspectedBy: 'Dr. Henrik Lindqvist',
       timestamp: '2026-08-25 14:20',
     },
     {
@@ -117,6 +118,13 @@ export const StructuralQADashboard: React.FC<StructuralQADashboardProps> = ({
           </div>
 
           <div className="flex flex-wrap items-center gap-2.5">
+            <button
+              onClick={() => onNavigateTab('operations')}
+              className="px-4 py-2.5 rounded-xl bg-emerald-500/15 hover:bg-emerald-500/25 text-emerald-800 dark:text-emerald-300 font-bold text-xs border border-emerald-500/40 transition flex items-center gap-2 shadow-sm"
+            >
+              <Radio className="w-4 h-4 text-emerald-500" />
+              <span>Owner Direct Line & Audits</span>
+            </button>
             <button
               onClick={() => onNavigateTab('inspection')}
               className="px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs transition flex items-center gap-2 shadow-sm"
