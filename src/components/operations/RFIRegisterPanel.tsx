@@ -36,7 +36,7 @@ const STATUS_BADGES: Record<RFIStatus, { bg: string; text: string; border: strin
 
 const PRIORITY_BADGES: Record<RFIPriority, { bg: string; text: string }> = {
   LOW: { bg: 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300', text: 'Low' },
-  MEDIUM: { bg: 'bg-blue-100 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300', text: 'Medium' },
+  NORMAL: { bg: 'bg-blue-100 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300', text: 'Normal' },
   HIGH: { bg: 'bg-amber-100 dark:bg-amber-950/60 text-amber-800 dark:text-amber-300', text: 'High' },
   CRITICAL: { bg: 'bg-rose-100 dark:bg-rose-950/60 text-rose-800 dark:text-rose-300', text: 'Critical' },
 };
@@ -69,7 +69,7 @@ export const RFIRegisterPanel: React.FC<RFIRegisterPanelProps> = ({ projectId, i
   const [newTitle, setNewTitle] = useState('');
   const [newQuestion, setNewQuestion] = useState('');
   const [newDiscipline, setNewDiscipline] = useState(DISCIPLINES[0]);
-  const [newPriority, setNewPriority] = useState<RFIPriority>('MEDIUM');
+  const [newPriority, setNewPriority] = useState<RFIPriority>('NORMAL');
   const [newDueAt, setNewDueAt] = useState('');
   const [submitting, setSubmitting] = useState(false);
 
@@ -372,7 +372,7 @@ export const RFIRegisterPanel: React.FC<RFIRegisterPanelProps> = ({ projectId, i
           <div className="divide-y divide-slate-100 dark:divide-[#14263a]">
             {filteredRFIs.map((rfi) => {
               const statusBadge = STATUS_BADGES[rfi.status] || STATUS_BADGES.OPEN;
-              const priorityBadge = PRIORITY_BADGES[rfi.priority] || PRIORITY_BADGES.MEDIUM;
+              const priorityBadge = PRIORITY_BADGES[rfi.priority] || PRIORITY_BADGES.NORMAL;
 
               return (
                 <div
@@ -718,7 +718,7 @@ export const RFIRegisterPanel: React.FC<RFIRegisterPanelProps> = ({ projectId, i
                     className="w-full text-xs py-2 px-3 rounded-xl border border-slate-300 dark:border-[#18314e] bg-white dark:bg-[#08101a] text-slate-800 dark:text-slate-200 focus:outline-none focus:border-amber-500"
                   >
                     <option value="LOW">Low</option>
-                    <option value="MEDIUM">Medium</option>
+                    <option value="NORMAL">Normal</option>
                     <option value="HIGH">High</option>
                     <option value="CRITICAL">Critical (Blocks Pour / Pour Staged)</option>
                   </select>

@@ -187,7 +187,7 @@ export class RFIService {
       };
     }
 
-    const userProfile = await userRepository.getProfileByAuthId(userId);
+    const userProfile = await userRepository.findByAuthUserId(userId);
     const respondedByName = userProfile
       ? `${userProfile.firstName} ${userProfile.lastName}`.trim()
       : 'Senior Project Director';
@@ -200,12 +200,14 @@ export class RFIService {
       status: 'ANSWERED',
     });
 
-    await auditEventRepository.createEvent({
+    await auditEventRepository.record({
+      id: `audit-${Date.now()}-${Math.random().toString(36).substring(2, 7)}`,
       actorUserId: userId,
       projectId,
       action: 'RFI_RESPONDED',
       entityType: 'RFI',
       entityId: rfi.id,
+      timestamp: new Date().toISOString(),
       metadata: {
         number: rfi.number,
         respondedByRole: role,
@@ -258,12 +260,14 @@ export class RFIService {
       acknowledgementNote: acknowledgementNote || 'Response acknowledged and incorporated into site operations plan.',
     });
 
-    await auditEventRepository.createEvent({
+    await auditEventRepository.record({
+      id: `audit-${Date.now()}-${Math.random().toString(36).substring(2, 7)}`,
       actorUserId: userId,
       projectId,
       action: 'RFI_ACKNOWLEDGED',
       entityType: 'RFI',
       entityId: rfi.id,
+      timestamp: new Date().toISOString(),
       metadata: {
         number: rfi.number,
       },
@@ -306,12 +310,14 @@ export class RFIService {
       closingNotes: closingNotes || 'RFI closed following resolution and contractor acknowledgement.',
     });
 
-    await auditEventRepository.createEvent({
+    await auditEventRepository.record({
+      id: `audit-${Date.now()}-${Math.random().toString(36).substring(2, 7)}`,
       actorUserId: userId,
       projectId,
       action: 'RFI_CLOSED',
       entityType: 'RFI',
       entityId: rfi.id,
+      timestamp: new Date().toISOString(),
       metadata: {
         number: rfi.number,
         closedByRole: role,
